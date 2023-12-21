@@ -61,25 +61,25 @@ int main()
 	ret = hid_get_feature_report(handle, buf_get, 65);
 
 	buf_send[2] = 0x5a;
-	buf_send[3] = year;		// Year (since 2000)
-	buf_send[4] = month;		// Month
-	buf_send[5] = day;		// Day
-	buf_send[6] = hour;		// Hour (24h format)
-	buf_send[7] = minutes;	// Minutes
-	buf_send[8] = seconds;	// Seconds
+	buf_send[3] = year; 	// Year (since 2000)
+	buf_send[4] = month; 	// Month
+	buf_send[5] = day; 	// Day
+	buf_send[6] = hour; 	// Hour (24h format)
+	buf_send[7] = minutes; 	// Minutes
+	buf_send[8] = seconds; 	// Seconds
 	ret = hid_send_feature_report(handle, buf_send, 65);
 	ret = hid_get_feature_report(handle, buf_get, 65);
 
+	hid_close(handle);
+	hid_exit();
+
 	if (ret < 0) {
 		printf("Failed to set date and time.\n");
-		hid_close(handle);
-		hid_exit();
 		return 1;
 	}
 
-	printf("Date/Time set to 20%02u-%02u-%02u %02u:%02u:%02u\n", year, month, day, hour, minutes, seconds);
+	printf("Date/Time set to 20%02u-%02u-%02u %02u:%02u:%02u\n",
+		year, month, day, hour, minutes, seconds);
 
-	hid_close(handle);
-	hid_exit();
 	return 0;
 }
