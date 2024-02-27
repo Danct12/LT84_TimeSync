@@ -33,7 +33,7 @@ int main()
 	time_t epoch = time(NULL);
 	struct tm *timeinfo = localtime(&epoch);
 	unsigned const int year = timeinfo->tm_year - 100,
-		month = timeinfo->tm_mon,
+		month = timeinfo->tm_mon + 1, 	// tm_mon range is 0-11
 		day = timeinfo->tm_mday,
 		hour = timeinfo->tm_hour,
 		minutes = timeinfo->tm_min,
